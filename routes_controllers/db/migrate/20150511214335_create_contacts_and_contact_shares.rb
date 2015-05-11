@@ -7,11 +7,14 @@ class CreateContactsAndContactShares < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :contacts do |t|
-      t.string :name, null: false
-      t.string :email, null: false
-      t.integer :user_id, null: false
+      create_table :contacts do |t|
+        t.string :name, null: false
+        t.string :email, null: false, unique: true
+        t.integer :user_id, null: false, unique: true
 
-      t.timestamps
+        t.timestamps
+    end
+
+    add_index :contacts, :user_id
   end
 end
